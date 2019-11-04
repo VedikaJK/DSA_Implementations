@@ -80,7 +80,7 @@ void HashTable::displayHT(){
         if(occupied[i]!=0)
         cout<<i<<"\t"<<table[i]<<"\n";
     }
-    cout<<"done\n";
+    //cout<<"done\n";
     cout<<endl;
 }
 
