@@ -65,20 +65,12 @@ void DisjointSet::MakeSet(int elt){
     else parent[elt]=elt;
 }
 int DisjointSet::FindSet(int j){
-    /*if(parent[i]==i) return i;
-    else {parent[i]=FindSet(i);
-    return parent[i];}*/
     if(parent[j]==-1){
         cout<<j<<" not present.\n";
         return -1;
     }
      if (parent[j] != j) { 
-
-            parent[j] = FindSet(parent[j]); 
-  
-            // so we recursively call Find on its parent 
-            // and move i's node directly under the 
-            // representative of this set 
+           parent[j] = FindSet(parent[j]); 
         } 
   
         return parent[j];
