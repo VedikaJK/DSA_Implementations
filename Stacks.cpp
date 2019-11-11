@@ -42,6 +42,12 @@ public:
         }
         return -1;
     }
+    void Display(){
+        for(int i=v.size()-1;i>=0;i--){
+            cout<<v[i]<<" ";
+        }
+        cout<<endl;
+    }
 };
 
 
@@ -52,17 +58,20 @@ int main()
 
 	s.push(1);
 	s.push(2);
-
-	s.pop();
-	s.pop();
-
 	s.push(3);
-
+    s.pop();
+	s.push(4);
+	s.push(5);
+	s.push(6);
+    s.pop();
+    s.Display();
 	cout << "Top element is: " << s.top() << endl;
 	cout << "Stack size is " << s.size() << endl;
 
 	s.pop();
-
+    s.pop();
+    s.pop();
+    s.pop();
 	if (s.isEmpty())
 		cout << "Stack Is Empty\n";
 	else
