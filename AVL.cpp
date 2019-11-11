@@ -25,7 +25,7 @@ struct Node *newNode(int data){
 	N->key = data;
 	N->left = NULL;
 	N->right = NULL;
-	N->height = 1;
+	N->height = 0;
 	return N;
 }
 
