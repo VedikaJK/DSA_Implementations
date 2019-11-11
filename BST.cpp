@@ -88,25 +88,6 @@ public:
     }
   }
 
-  BST *inorder_successor(BST *root, BST *node){
-    BST* temp = Search(node->data, root);
-    if(temp->right != NULL) return Min(temp->right);
-
-    BST* successor = NULL;
-
-    while(root!= NULL){
-        if(node->data < root->data){
-            successor = root;
-            root = root->left;
-        }
-        else if(node->data > root->data){
-            root = root->right;
-        }
-        else break;
-    }
-    return successor;
-  }
-
   BST *join(BST *t1, BST *t2){
     if(t1 == NULL) return t2;
     if(t2 == NULL) return t1;
@@ -141,7 +122,12 @@ int main(){
     t2->Insert(666, t2);
 	  t2->inorder(t2);
     cout<<endl;
-
+    if(t2->Search(222,t2)) cout<<1;
+    else cout<<0;
+    cout<<endl;
+if(t2->Search(22,t2)) cout<<1;
+    else cout<<0;
+    cout<<endl;
     BST *t = NULL;
     t = t->join(t1, t2);
     t->inorder(t);
