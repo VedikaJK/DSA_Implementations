@@ -236,10 +236,14 @@ int main(){
     root2 = Insert(root2, 112);
     root2 = Insert(root2, -1);
     root2 = Insert(root2, 82);
-    root2 = Insert(root2, 44);
+   
 
     inorder(root2);
+    Delete(root2, 12);
     cout<<endl;
+    inorder(root2);
+    cout<<endl;
+    
     struct Node *t = join(root, root2);
     inorder(t);
     cout<<endl;
