@@ -81,9 +81,13 @@ int main(){
   node *root = NULL;
 	root = root->Insertleft(root, 99);
 	root = root->Insertright(root, 1);
-	root = root->Insertright(root, 10);
+	root = root->Insertleft(root,119);
+    
+    root = root->Insertright(root, 10);
 	root = root->Insertright(root,77);
 	root = root->Insertright(root,88);
+    root = root->Insertleft(root,109);
+
 	root->inorder(root);
 	cout<<endl;
 	root->preorder(root);
