@@ -1,108 +1,64 @@
-#include <bits/stdc++.h>
-using namespace std;
- 
+#include<bits/stdc++.h>
+#define gc getchar_unlocked
+#define fo(i,n) for(i=0;i<n;i++)
+#define Fo(i,k,n) for(i=k;i<n;i++)
+#define lli long long int
+#define pii pair<int,int>
+#define vi vector<int>
+#define pb push_back
+#define mp make_pair
+#define mod 1000000007
 #define ll long long
+#define SIZE 100001
  
-struct kruskal
-{
-    ll x;
-    ll y;
-    ll w;
-};
+using namespace std;
 
-struct node
+lli parent[SIZE],rankv[SIZE];
+void makeSet(lli  x)
 {
-    ll parent;
-    ll rank;
-};
+    parent[x]=x;
+    rankv[x]=1;
+}
+ 
+lli  findset(lli  x)
+{
+    if (x==parent[x]) return x;
+    return parent[x]=findset(parent[x]);
+}
+ 
+void Union (lli  a, lli  b)
+{
+    a=findset(a);
+    b=findset(b);
+    if (a!=b)
+    {
+        if (rankv[a]<rankv[b]) swap(a,b);
+        parent[b]=a;
+        rankv[a]+=rankv[b];
+    }
+}
 
-bool compare(kruskal a, kruskal b)
-{
-    return a.w < b.w;
-}
- 
-ll find(ll x, node* a)
-{
-    if(a[x].parent == x)
-    {
-        return x;
-    }
-    a[x].parent = find(a[x].parent, a);
-}
-
-void unionset(ll x, ll y, node* a)
-{
-    ll xroot = find(x,a);
-    ll yroot = find(y,a);
-    
-    if(a[xroot].rank < a[yroot].rank)
-    {
-        a[xroot].parent = yroot;
-    }
-    else if(a[xroot].rank > a[yroot].rank)
-    {
-        a[yroot].parent = xroot;
-    }
-    else
-    {
-        a[yroot].parent = xroot;
-        a[xroot].rank++;
-    }
-}
- 
-void mstkruskal(kruskal* edges, ll e, vector<kruskal>&mst, ll v)
-{
-    node a[v];
-    for(ll i=0;i<v;i++)
-    {
-        a[i].parent = i;
-        a[i].rank = 0;
-    }
-    
-    ll count = 0;
-    ll i = 0;
-    while(count<v-1)
-    {
-        ll x = edges[i].x;
-        ll y = edges[i].y;
-        if(find(x,a)!=find(y,a))
-        {
-            mst.push_back(edges[i]);
-            unionset(x,y,a);
-            count++;
-        }
-        i++;
-    }
-    
-    
-}
- 
-int main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    
-    ll v,e;
+int main(){
+    vector<pair<lli,pair<lli,lli>>> vec;
+    lli i,e,v;
     cin>>v>>e;
-    //vector<ll> adjlist[v];
-    kruskal edges[e];
-    vector<kruskal> mst;
-    for(ll i=0;i<e;i++)
-    {
-        cin>>edges[i].w>>edges[i].x>>edges[i].y;
+    lli a,b,w;
+    fo(i,v) makeSet(i);
+    fo(i,e){
+        
+        cin>>a>>b>>w;
+        vec.push_back(make_pair(w,make_pair(a,b)));
     }
-    sort(edges,edges+e,compare);
-    mstkruskal(edges,e,mst,v);
-    for(ll i=0;i<mst.size();i++)
-    {
-        cout<<mst[i].x<<" "<<mst[i].y<<" "<<mst[i].w<<endl;
+    sort(vec.begin(),vec.end());
+    lli ans=1;
+    for(lli z=e-1;z>=0;z--){
+        w=vec[z].first;
+        a=vec[z].second.first;
+        b=vec[z].second.second;
+        if(findset(a)!=findset(b)){
+            ans=((ans%mod)*(w%mod))%mod;
+            Union (a,b);
+        }
     }
-    ll cost = 0;
-    for(ll i=0;i<mst.size();i++)
-    {
-        cost+=mst[i].w;
-    }
-    cout<<"cost- "<<cost<<endl;
-    return 0;
+    cout<<ans<<"\n";
 }
